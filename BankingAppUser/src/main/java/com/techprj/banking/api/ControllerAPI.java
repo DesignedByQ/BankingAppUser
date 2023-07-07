@@ -80,6 +80,11 @@ public class ControllerAPI {
 		return ResponseEntity.status(HttpStatus.OK).body(intServiceDAOImpl.getProfile(emailid));
 	}
 	
+	@GetMapping(value="/getprobyid/{id}", consumes = {MediaType.ALL_VALUE}, produces = {"application/json", "application/xml"})
+	public ResponseEntity<UserProfileDTO> getProfileById(@PathVariable("id") Long id) {
+		return ResponseEntity.status(HttpStatus.OK).body(intServiceDAOImpl.getProfileById(id));
+	}
+	
 	@GetMapping(value="/getlog/{emailid}", consumes = {MediaType.ALL_VALUE}, produces = {"application/json", "application/xml"})
 	public ResponseEntity<List<LoginLogDTO>> getLog(@PathVariable("emailid") String emailid) {
 		return ResponseEntity.status(HttpStatus.OK).body(intServiceDAOImpl.getLog(emailid));

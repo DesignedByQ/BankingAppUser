@@ -9,6 +9,7 @@ import java.net.UnknownHostException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Map;
+import java.util.Optional;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -74,6 +75,30 @@ public class INTServiceDAOImpl implements INTServiceDAO {
 		updto.setAddressDTO(adddto);
 		
 		return updto;
+	}
+	
+	@Override
+	public UserProfileDTO getProfileById(Long id) {
+
+		Optional<UserProfile> up = userProfileRepo.findById(id);
+		//System.out.println(up.getAuthUser().getTwoFACodeExpiryTime());
+		
+		if(up.isPresent()) {
+			
+			AuthUserDTO audto = modelMapper.map(up.get().getAuthUser(), AuthUserDTO.class);
+			AddressDTO adddto = modelMapper.map(up.get().getAddress(), AddressDTO.class);
+			
+			UserProfileDTO updto = modelMapper.map(up, UserProfileDTO.class);
+			
+			updto.setAuthUserDTO(audto);
+			updto.setAddressDTO(adddto);
+			
+			return updto;
+			
+		}
+		
+		return null;
+		
 	}
 
 	@Override

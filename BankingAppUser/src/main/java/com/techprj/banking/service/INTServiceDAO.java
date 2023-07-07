@@ -15,4 +15,6 @@ public interface INTServiceDAO {
 	
 	List<LoginLogDTO> getLog(String emailid);
 
+	UserProfileDTO getProfileById(Long id);
+
 }
