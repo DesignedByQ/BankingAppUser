@@ -55,7 +55,7 @@ public class ControllerAPI {
 	@Autowired
 	RestTemplate restTemplate;
 	
-	@PostMapping(value="/adduser", consumes = {MediaType.ALL_VALUE})
+	@PostMapping(value="/adduser", consumes = {MediaType.ALL_VALUE}, produces = {"application/json", "application/xml"})
 	public ResponseEntity<UserProfileDTO> addUser(@RequestBody UserProfileDTO userProfileDTO) throws AddressException, MessagingException {
 		
 		//send email to cust and delete oject from registration DB
@@ -82,6 +82,8 @@ public class ControllerAPI {
 	
 	@GetMapping(value="/getprobyid/{id}", consumes = {MediaType.ALL_VALUE}, produces = {"application/json", "application/xml"})
 	public ResponseEntity<UserProfileDTO> getProfileById(@PathVariable("id") Long id) {
+		
+		//System.out.println(id);
 		return ResponseEntity.status(HttpStatus.OK).body(intServiceDAOImpl.getProfileById(id));
 	}
 	
