@@ -17,9 +17,11 @@ import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import com.techprj.banking.dto.AddressDTO;
 import com.techprj.banking.dto.AuthUserDTO;
 import com.techprj.banking.dto.LoginLogDTO;
@@ -40,6 +42,9 @@ public class INTServiceDAOImpl implements INTServiceDAO {
 	
 	@Autowired
 	ModelMapper modelMapper;
+	
+	@Autowired
+	RestTemplate restTemplate;
 
 	@Override
 	public UserProfileDTO addUser(UserProfileDTO userProfileDTO) {
@@ -66,6 +71,17 @@ public class INTServiceDAOImpl implements INTServiceDAO {
 
 		UserProfile up = userProfileRepo.findByEmail(emailid);
 		//System.out.println(up.getAuthUser().getTwoFACodeExpiryTime());
+	
+		long id = up.getIdUserProfile();
+		
+		Object[] acc = restTemplate.getForObject("http://localhost:8083/api/getaccounts/"+id, Object[].class);
+	
+		up.setAccounts(acc);
+			
+		//System.out.println(up.getAccounts()[0]);
+	
+		//UserProfile up1 = userProfileRepo.save(up);
+		
 		AuthUserDTO audto = modelMapper.map(up.getAuthUser(), AuthUserDTO.class);
 		AddressDTO adddto = modelMapper.map(up.getAddress(), AddressDTO.class);
 		
