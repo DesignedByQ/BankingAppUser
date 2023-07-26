@@ -9,9 +9,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-//import javax.persistence.Table;
-import org.springframework.data.relational.core.mapping.Table;
+import javax.persistence.Table;
+
+//import org.springframework.data.relational.core.mapping.Table;
 import org.joda.time.DateTime;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="authentication")
@@ -27,7 +30,8 @@ public class AuthUser {
 	private Boolean isStaff;
 	private Long twoFACode;
 	@Column(name = "twoFACodeexpirytime")
-	private Long twoFACodeExpiryTime;	
+	private Long twoFACodeExpiryTime;
+	@JsonIgnore
 	@OneToOne(mappedBy = "authUser")
 	private UserProfile userProfile;
 	
@@ -116,7 +120,7 @@ public class AuthUser {
 	public String toString() {
 		return "AuthUser [idAuthUser=" + idAuthUser + ", username=" + username + ", password=" + password
 				+ ", isSuperuser=" + isSuperuser + ", isStaff=" + isStaff + ", twoFACode=" + twoFACode
-				+ ", twoFACodeExpiryTime=" + twoFACodeExpiryTime + ", userProfile=" + userProfile + "]";
+				+ ", twoFACodeExpiryTime=" + twoFACodeExpiryTime + "]";
 	}
 		
 }

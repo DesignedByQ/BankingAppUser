@@ -1,11 +1,12 @@
 package com.techprj.banking.dto;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.sql.Timestamp;
 
 import org.joda.time.DateTime;
 
-public class AuthUserDTO {
+public class AuthUserDTO implements Serializable {
 	
 	private Integer idAuthUser;
 	private String username;

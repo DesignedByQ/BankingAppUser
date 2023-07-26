@@ -1,6 +1,8 @@
 package com.techprj.banking.dto;
 
-public class AddressDTO {
+import java.io.Serializable;
+
+public class AddressDTO implements Serializable {
 	
 	private Integer addressID;
 	private String buildingNo;

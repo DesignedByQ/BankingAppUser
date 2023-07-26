@@ -1,6 +1,7 @@
 package com.techprj.banking.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.techprj.banking.dto.LoginLogDTO;
 import com.techprj.banking.dto.UserProfileDTO;
@@ -16,5 +17,7 @@ public interface INTServiceDAO {
 	List<LoginLogDTO> getLog(String emailid);
 
 	UserProfileDTO getProfileById(Long id);
+	
+	UserProfileDTO updateUser(Long userid, Map<Object, Object> fields);
 
 }

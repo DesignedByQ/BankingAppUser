@@ -23,9 +23,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-//import javax.persistence.Table;
+import javax.persistence.Table;
 
-import org.springframework.data.relational.core.mapping.Table;
+//import org.springframework.data.relational.core.mapping.Table;
 
 //import com.techprj.accounts.entity.Account;
 import com.techprj.banking.dto.AddressDTO;
@@ -164,9 +164,10 @@ public class UserProfile implements Serializable {
 		this.accounts = accounts;
 	}
 
+	
 	@Override
 	public String toString() {
-		return "UserProfile [idUserProfile=" + idUserProfile + ", authUser=" + authUser + ", firstName=" + firstName
+		return "UserProfile [idUserProfile=" + idUserProfile + ", firstName=" + firstName + ", authUser=" + authUser
 				+ ", middleName=" + middleName + ", lastName=" + lastName + ", mobile=" + mobile + ", email=" + email
 				+ ", address=" + address + ", customerSince=" + customerSince + ", accounts="
 				+ Arrays.toString(accounts) + "]";

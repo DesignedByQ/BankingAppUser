@@ -1,6 +1,7 @@
 package com.techprj.banking.api;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.mail.MessagingException;
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -82,7 +84,6 @@ public class ControllerAPI {
 	
 	@GetMapping(value="/getprobyid/{id}", consumes = {MediaType.ALL_VALUE}, produces = {"application/json", "application/xml"})
 	public ResponseEntity<UserProfileDTO> getProfileById(@PathVariable("id") Long id) {
-		
 		//System.out.println(id);
 		return ResponseEntity.status(HttpStatus.OK).body(intServiceDAOImpl.getProfileById(id));
 	}
@@ -133,6 +134,12 @@ public class ControllerAPI {
 		}
 		
 		return new ResponseEntity<>(HttpStatus.FORBIDDEN);	
+		
+	}
+	
+	@PatchMapping(value="/updateuser/{userid}", consumes = {MediaType.ALL_VALUE})
+	public ResponseEntity<UserProfileDTO> updateUser(@PathVariable("userid") Long userid, @RequestBody Map<Object, Object> fields){
+		return ResponseEntity.status(HttpStatus.OK).body(intServiceDAOImpl.updateUser(userid, fields));
 		
 	}
 	
