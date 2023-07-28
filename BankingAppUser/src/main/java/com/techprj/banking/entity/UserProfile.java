@@ -20,6 +20,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -54,21 +55,16 @@ public class UserProfile implements Serializable {
     @JoinColumn(name = "address_ID")
 	private Address address;
 	private LocalDate customerSince;
+	//@Lob
+	//@Column(name = "accounts", columnDefinition = "longblob")
 	private Object[] accounts;
-//	@ManyToMany(fetch = FetchType.LAZY)
-//	@JoinTable(
-//			name="account_user_profile", 
-//			joinColumns = @JoinColumn(name = "user_profile_id"),
-//			inverseJoinColumns = @JoinColumn(name = "account_id")
-//	)
-//	private List<Account> account = new ArrayList<>();
 	
 	public UserProfile() {
 		super();
 	}
 
 	public UserProfile(Long idUserProfile, AuthUser authUser, String firstName, String middleName, String lastName,
-		Long mobile, String email, Address address, LocalDate customerSince, Object[] accounts) {
+			Long mobile, String email, Address address, LocalDate customerSince, Object[] accounts) {
 		super();
 		this.idUserProfile = idUserProfile;
 		this.authUser = authUser;
@@ -81,8 +77,6 @@ public class UserProfile implements Serializable {
 		this.customerSince = customerSince;
 		this.accounts = accounts;
 	}
-
-
 
 	public Long getIdUserProfile() {
 		return idUserProfile;
@@ -164,16 +158,15 @@ public class UserProfile implements Serializable {
 		this.accounts = accounts;
 	}
 
-	
 	@Override
 	public String toString() {
-		return "UserProfile [idUserProfile=" + idUserProfile + ", firstName=" + firstName + ", authUser=" + authUser
+		return "UserProfile [idUserProfile=" + idUserProfile + ", authUser=" + authUser + ", firstName=" + firstName
 				+ ", middleName=" + middleName + ", lastName=" + lastName + ", mobile=" + mobile + ", email=" + email
 				+ ", address=" + address + ", customerSince=" + customerSince + ", accounts="
 				+ Arrays.toString(accounts) + "]";
 	}
-	
-    public static UserProfile deserialize(byte[] bytes) {
+
+	public static UserProfile deserialize(byte[] bytes) {
         LOGGER.info("Deserialization started.");
         try (ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
              ObjectInput in = new ObjectInputStream(bis)) {

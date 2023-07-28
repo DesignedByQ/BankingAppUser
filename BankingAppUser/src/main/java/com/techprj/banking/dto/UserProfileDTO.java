@@ -49,8 +49,6 @@ public class UserProfileDTO implements Serializable {
 		this.accounts = accounts;
 	}
 
-
-
 	public Long getIdUserProfile() {
 		return idUserProfile;
 	}
@@ -130,10 +128,10 @@ public class UserProfileDTO implements Serializable {
 	public void setAccounts(Object[] accounts) {
 		this.accounts = accounts;
 	}
-	
+
 	
 
-    @Override
+	@Override
 	public String toString() {
 		return "UserProfileDTO [idUserProfile=" + idUserProfile + ", authUserDTO=" + authUserDTO + ", firstName="
 				+ firstName + ", middleName=" + middleName + ", lastName=" + lastName + ", mobile=" + mobile
