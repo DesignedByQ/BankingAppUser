@@ -1,2 +1,4 @@
 # BankingAppUser
-Full Stack Banking App User MS
+Full Stack - Banking App - User Microservice
+
+
